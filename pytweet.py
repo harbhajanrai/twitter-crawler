@@ -21,18 +21,15 @@ def get_where_on_earth_id(country = None):
 def get_trends(country = None):
     woeid = get_where_on_earth_id(country)
     print(woeid)
-    if country :
-        try:
+    try:
+        if country:
             trends = api.GetTrendsWoeid(woeid, exclude=None)
-            pprint(trends)
-        except Exception as e:
-            print(e[0][0]["message"])
-    else:
-        try:
+        else:
             trends = api.GetTrendsCurrent()
-            pprint(trends)
-        except Exception as e:
-            print(e[0][0]["message"])
+        for trend in trends:
+            print(trend.name)
+    except Exception as e:
+        print(e)
 
 
 if __name__ == "__main__":
